@@ -1,0 +1,7 @@
+aws emr-serverless start-job-run `
+--profile walter_poc `
+--name Delta-Upsert `
+--application-id 00fgb3cqf6qt1m09 `
+--execution-role-arn arn:aws:iam::400424363662:role/EMRServerlessJobRole `
+--job-driver '{\"sparkSubmit\": {\"entryPoint\": \"s3://demo-deltalake-titanicdataset/python/data_pipeline_titanic.py\", \"sparkSubmitParameters\": \"--conf spark.jars=s3://demo-deltalake-titanicdataset/jars/delta-spark_2.12-3.0.0.jar,s3://demo-deltalake-titanicdataset/jars/delta-storage-3.0.0.jar\"}}' `
+--configuration-overrides '{\"monitoringConfiguration\": {\"s3MonitoringConfiguration\": {\"logUri\": \"s3://demo-deltalake-titanicdataset/emr-serverless-logs/\"}}}' 
